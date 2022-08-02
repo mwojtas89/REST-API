@@ -18,6 +18,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("v1/tasks")
+@CrossOrigin("*")
 public class TaskController {
 
     private final DbService service;
