@@ -14,7 +14,7 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @Getter
 @Setter
-@Entity(name= "task")
+@Entity(name= "tasks")
 public class Task {
     @Id
     @GeneratedValue
