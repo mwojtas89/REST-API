@@ -28,7 +28,11 @@ class SimpleEmailServiceTest {
     @Test
     void shouldSendEmail () {
         //Given
-        Mail mail = new Mail("test@test.com", null, "test subject", "test massage");
+        Mail mail = Mail.builder()
+                .mailTo("test@test.com")
+                .subject("test subject")
+                .massage("test massage")
+                .build();
 
         SimpleMailMessage newMail = new SimpleMailMessage();
         newMail.setTo(mail.getMailTo());
@@ -45,8 +49,17 @@ class SimpleEmailServiceTest {
     @Test
     void ccTestSuite () {
         //Given
-        Mail mail = new Mail("test@test.com", "cc present", "test subject", "test massage");
-        Mail mailNoCc = new Mail("test@test.com", null, "test subject", "test massage");
+        Mail mail = Mail.builder()
+                .mailTo("test@test.com")
+                .toCc("cc@cc.com")
+                .subject("test subject")
+                .massage("test massage")
+                .build();
+        Mail mailNoCc = Mail.builder()
+                .mailTo("test@test.com")
+                .subject("test subject")
+                .massage("test massage")
+                .build();
 
         SimpleMailMessage newMail = new SimpleMailMessage();
         newMail.setTo(mail.getMailTo());
