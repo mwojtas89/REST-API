@@ -27,11 +27,13 @@ public class TrelloService {
     public CreatedTrelloCard createTrelloCard (final TrelloCardDto trelloCardDto) {
         CreatedTrelloCard newCard = trelloClient.createNewCard(trelloCardDto);
 
-        Optional.ofNullable(newCard).ifPresent(card -> simpleEmailService.send(Mail.builder()
-                .mailTo(adminConfig.getAdminMail())
-                .subject(SUBJECT)
-                .massage("New card " + trelloCardDto.getName() + " has been created on your account")
-                .build()));
+        Optional.ofNullable(newCard).ifPresent(card -> {
+            simpleEmailService.send(Mail.builder()
+                    .mailTo(adminConfig.getAdminMail())
+                    .subject(SUBJECT)
+                    .massage("New card " + trelloCardDto.getName() + " has been created on your account")
+                    .build());
+        });
 
         return newCard;
     }
