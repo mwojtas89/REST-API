@@ -1,10 +1,9 @@
 package com.crud.tasks.trello.facade;
 
-import com.crud.tasks.domain.TrelloBoard;
-import com.crud.tasks.domain.TrelloBoardDto;
+import com.crud.tasks.domain.*;
 import com.crud.tasks.mapper.TrelloMapper;
 import com.crud.tasks.service.TrelloService;
-import lombok.AllArgsConstructor;
+import com.crud.tasks.trello.validator.TrelloValidator;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,9 +20,18 @@ public class TrelloFacade {
 
     private final TrelloService trelloService;
     private final TrelloMapper trelloMapper;
+    private final TrelloValidator trelloValidator;
 
-    public List<TrelloBoard> fetchTrelloBoards() {
-        return trelloMapper.mapToBoards(trelloService.fetchTrelloBoards());
+    public List<TrelloBoardDto> fetchTrelloBoards() {
+        List<TrelloBoard> trelloBoards = trelloMapper.mapToBoards(trelloService.fetchTrelloBoards());
+        List<TrelloBoard> filtredtrelloBoards = trelloValidator.validateTrelloBoards(trelloBoards);
+        return trelloMapper.mapToBoardsDto(filtredtrelloBoards);
+    }
+
+    public CreatedTrelloCardDto createCard(final TrelloCardDto trelloCardDto) {
+        TrelloCard trelloCard = trelloMapper.mapToCard(trelloCardDto);
+        trelloValidator.validateCard(trelloCard);
+        return trelloService.createTrelloCard(trelloMapper.mapToCardDto(trelloCard));
     }
 
 }
