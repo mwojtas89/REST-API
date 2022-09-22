@@ -6,6 +6,7 @@ import com.crud.tasks.domain.TrelloCardDto;
 import com.crud.tasks.service.TrelloService;
 import com.crud.tasks.trello.facade.TrelloFacade;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,7 @@ public class TrelloController {
 
     }
 
-    @PostMapping("cards")
+    @PostMapping(value = "cards", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CreatedTrelloCardDto> createTrelloCard (@RequestBody TrelloCardDto trelloCardDto) {
         return ResponseEntity.ok(trelloFacade.createCard(trelloCardDto));
     }

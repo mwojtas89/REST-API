@@ -29,6 +29,7 @@ dependencies {
 	runtimeOnly 'mysql:mysql-connector-java'
 	testCompileOnly 'org.projectlombok:lombok:1.18.24'
 	testAnnotationProcessor 'org.projectlombok:lombok:1.18.24'
+	testImplementation 'com.google.code.gson:gson'
 
 	//providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
