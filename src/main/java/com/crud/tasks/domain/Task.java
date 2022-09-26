@@ -9,7 +9,6 @@ import javax.persistence.Id;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
 @Data
 @Entity(name= "tasks")
 public class Task {
